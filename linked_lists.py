@@ -27,22 +27,25 @@ class LinkedList:
     self.head_node = new_node
 
   def stringify_list(self):
-    node = self.head_node
-    node_string = ''
-    while True:
-      node_string += str(node.get_value()) + '\n'
-      node = node.get_next_node()
-      if node == None:
-        break
-    return node_string
+    string_list = ""
+    current_node = self.get_head_node()
+    while current_node:
+      if current_node.get_value() != None:
+        string_list += str(current_node.get_value()) + "\n"
+      current_node = current_node.get_next_node()
+    return string_list
 
-# Add your insert_beginning and stringify_list methods below:
+  def remove_node(self, value_to_remove):
+    current_node = self.head_node
+    if current_node.get_value() == value_to_remove:
+      self.head_node = current_node.get_next_node()
+    else:
+      next_node = current_node.get_next_node()
+      while next_node.get_value() != value_to_remove:
+        current_node = current_node.get_next_node()
+        next_node = current_node.get_next_node()
+      current_node.set_next_node(next_node.get_next_node())
+      next_node = None
 
 
-
-# Test your code by uncommenting the statements below - did your list print to the terminal?
-ll = LinkedList(5)
-ll.insert_beginning(70)
-ll.insert_beginning(5675)
-ll.insert_beginning(90)
-print(ll.stringify_list())
+  # Define your remove_node method below:
